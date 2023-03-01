@@ -1,24 +1,31 @@
-// #include <iostream>
-// #include <vector>
+#include <iostream>
+#include <vector>
 
-// using namespace std;
+using namespace std;
 
-// int n, ret;
-// vector<int> v;
+int n, ret;
+vector<int> v;
 
-// main(){
-//     for(int i = 1; i < n; i++){
-//         if(i > 9){
-//             getN(i);
-//         }
-//         if()
-//         v.clear();
-//     }
-// }
+main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
 
-// void getN(int i){
-//     while(i){
-//         v.push_back(i % 10);
-//         i /= 10;
-//     }
-// }
+    cin >> n;
+
+    for(int i = 1; i <= n; i++){
+        int num = i;
+        if(i == n){
+            cout << 0;
+        }
+        while(num){
+            ret += num % 10;
+            num /= 10;
+        }
+        //종료조건
+        if(ret + i == n){
+            cout << i << "\n";
+            break;
+        }
+        ret = 0;
+    }
+}

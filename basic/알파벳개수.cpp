@@ -1,24 +1,21 @@
-// #include <iostream>
-// #include <vector>
+#include <iostream>
+#include <vector>
 
-// using namespace std;
+using namespace std;
 
-// int n, ret;
-// vector<int> v;
+int n, ret;
+string s;
+int alpha[26];
+vector<int> v;
 
-// main(){
-//     for(int i = 1; i < n; i++){
-//         if(i > 9){
-//             getN(i);
-//         }
-//         if()
-//         v.clear();
-//     }
-// }
+main(){
+    cin >> s;
 
-// void getN(int i){
-//     while(i){
-//         v.push_back(i % 10);
-//         i /= 10;
-//     }
-// }
+    for(int i =0; i < s.length(); i++){
+        alpha[s[i] - 'a']++;
+    }
+
+     for(int i =0; i < 26; i++){
+        cout << alpha[i] << " ";
+    }
+}
