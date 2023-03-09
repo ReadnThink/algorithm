@@ -10,11 +10,10 @@ int n;
 string s;
 
 string quard(int y, int x, int size){
-	// cout << y << " : " << x << " : " << size << '\n';
+	cout << y << " : " << x << " : " << size << '\n';
 	if(size == 1) return string(1, a[y][x]);
 	char b = a[y][x];
 	string ret = "";
-	bool flag = 0;
 	for(int i = y; i < y + size; i++){
 		for(int j = x; j < x + size; j++){
 			if(b!= a[i][j]){
@@ -24,6 +23,7 @@ string quard(int y, int x, int size){
 				ret += quard(y + size / 2, x, size / 2);
 				ret += quard(y + size / 2, x + size / 2, size / 2);
 				ret += ')';
+				cout << "ret = " << ret << '\n';
 				return ret;
 			}
 		}
