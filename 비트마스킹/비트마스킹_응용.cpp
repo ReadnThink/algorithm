@@ -2,17 +2,18 @@
 #include <vector>
 #include <queue>
 #include <climits>
+#include <bitset>
 using namespace std;
-const int n = 4;
-string a[n] = {"Apple!", "Strawberry!", "Grape!", "Watermelon!"};
+const int n = 6;
+string a[n] = {"Apple!", "Strawberry!", "Grape!", "Watermelon!", "Sol!", "Kent!"};
 	/*
 		집합 구하는 방법
 	*/
 void get_set(){
 
 	for(int i = 0; i < (1 << n); i++){
-	string ret = "";
-		// cout << i << " : "; // 디버깅
+		string ret = "";
+		cout << i << " : " << bitset<8>(i) << "     : "; // 디버깅
 		for(int j = 0; j < n; j++){
 
 			if(i & (1 << j)){
@@ -44,13 +45,13 @@ int main(){
 	/*
 		집합 구하는 방법
 	*/
-	// get_set();
+	get_set();
 
 	/*
 		매개변수 전달하기
 	*/
-	for(int i = 1; i < n; i++){
-		send_param(i | (1 << i));
-	}
+	// for(int i = 1; i < n; i++){
+	// 	send_param(i | (1 << i));
+	// }
 	return 0;
 }
