@@ -14,12 +14,17 @@ priority_queue<int, vector<int>, greater<int>> pq;
 void Solve(){
 	for(auto i : v_pair){
 		pq.push(i.second);
+		cout << pq.size() << " :  i first = " << i.first << '\n';
 		if(pq.size() > i.first){
+			
+			cout << pq.top() << '\n';
 			pq.pop();
 		}
 	}
 
+	cout << "finish------------\n";
 	while(pq.size()){
+		cout << pq.top() << '\n';
 		ret += pq.top(); pq.pop();
 	}
 }

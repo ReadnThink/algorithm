@@ -7,10 +7,11 @@
 #include <queue>
 
 using namespace std;
-int T,N,M,ret,grid[104][104],visited[104][104];
+int N,M, ret, visited[100004];
+vector<int> km,price, adj[10004];
 
 const int dy[] = {-1,0,1,0};
-const int dx[] = {0,1,0,-1};
+const int dx[] = {0,-1,0,1};
 
 // void test_print(){
 // 	for(int i = N; i < N + 10; i++){
@@ -21,41 +22,35 @@ const int dx[] = {0,1,0,-1};
 // 	}
 // }
 
-void dfs(int y, int x){
-	// cout << y <<" : " << x << "\n";
-	ret++;
-
-	visited[y][x] = 1;
-	for(int i = 0; i < 4; i++){
-		int ny = y+dy[i];
-		int nx = x+dx[i];
-
-		if(ny < N || nx < M || ny >= N + 10 || nx >= M + 10 || visited[ny][nx]) continue;
-		dfs(ny,nx);
-	}
-}
-
 void Input(){
-	cin >> T;
-
-	while(T--){
-		cin >> M >> N;
-
-		for(int i = N; i < N + 10; i++){
-			for(int j = M; j < M + 10; j++){
-				if(!visited[i][j]){
-					dfs(i,j);
-				}
-			}
-		}
+	cin >> N >> M;
+	for(int i = 0; i < M; i++){
+		int a, b; cin >> a >> b;
+		adj[a].push_back(b);
+		adj[b].push_back(a);
 	}
-	// test_print();
-	cout << ret << '\n';
 }
+
+
+void Solution(int node){
+	visited[node] = true;
+
+	for(int value : adj[node]){
+		if(!visited[value]) Solution(value);
+	}
+}
+
+
 void Solve(){
 	Input();
+	for(int i = 1; i <= N; i++){
+		if(!visited[i]){
+			Solution(i);
+			ret++;
+		}
+	}
 	// Test_print();
-	// cout << ret << '\n';
+	cout << ret << '\n';
 }
 int main(){
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);

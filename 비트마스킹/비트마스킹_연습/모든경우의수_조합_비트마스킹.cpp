@@ -9,7 +9,6 @@ int N,M,ret,visited[100];
 
 void Input(){
 	cin >> N;
-
 }
 
 void bitMask(){
