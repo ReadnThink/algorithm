@@ -19,7 +19,6 @@ int main(){
 		sum += num;
 		ret = max(ret, sum);
 		if(sum < 0) sum = 0;
-
 	}
 
 	cout << ret << '\n';
