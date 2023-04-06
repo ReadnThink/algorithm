@@ -26,9 +26,9 @@ int main(){
 		mx += temp;
 		v.push_back(temp);
 	}
-	ll lo = 1, hi = LONG_MAX;
+	ll lo = 1, hi = 1e9;
 	while(lo <= hi){
-		ll mid = (lo + hi) / 2;
+		ll mid = (lo + hi) / (1LL * 2);
 		if(check(mid)){
 			lo = mid + 1;
 			ret = mid;
