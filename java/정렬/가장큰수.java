@@ -2,15 +2,22 @@ package 정렬;
 
 import java.util.Arrays;
 
-public class K번째수 {
-    public int[] solution(int[] array, int[][] commands) {
-        int[] answer = new int[commands.length];
-
-        for(int i = 0; i < commands.length; i++){
-            int[] temp = Arrays.copyOfRange(array, commands[i][0] - 1, commands[i][1]);
-            Arrays.sort(temp);
-            answer[i] = temp[commands[i][2] - 1];
+public class 가장큰수 {
+    public String solution(int[] numbers) {
+        String[] arr = new String[numbers.length];
+        for(int i = 0; i < arr.length; i++){
+            arr[i] = String.valueOf(numbers[i]);
         }
-        return answer;
+
+        Arrays.sort(arr, (o1, o2) -> (o2 + o1).compareTo(o1 + o2));
+        // System.out.println(Arrays.toString(arr));
+        if(arr[0].equals("0")){
+            return "0";
+        }
+        StringBuilder answer = new StringBuilder();
+        for(int i = 0; i < arr.length; i++){
+            answer.append(arr[i]);
+        }
+        return answer.toString();
     }
 }
