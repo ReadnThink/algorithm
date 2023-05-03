@@ -36,6 +36,9 @@ int main(){
     }
     //구간합 구하기
     setTree(treeSize - 1);
+    
+    for(auto i : tree) cout << i << ' ';
+    cout << '\n';
 
     // 질의 받기
     for(int i = 0; i < M + K; i++){

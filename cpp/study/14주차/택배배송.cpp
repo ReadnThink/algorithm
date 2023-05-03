@@ -1,57 +1,51 @@
 #include <bits/stdc++.h>
-using namespace std;
 const int INF = 987654321;
-void print();
-
-int v,e,start, sum, cnt, dist[50001];
-vector<pair<int,int>> adj[50001];
-priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; 
-
+const int MX = 50001;
+using namespace std;
+int n,m,dist[MX];
+vector<pair<int,int>> adj[MX];
+priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> q;
+// queue<pair<int,int>> q;
 void input(){
-	cin >> v >> e;
+    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 
-	int u,v,w;
-	for(int i = 0; i < e; i++){
-		cin >> u >> v >> w;
-		adj[u].push_back({w,v});
-		adj[v].push_back({w,u});
-	}
+    cin >> n >> m;
+    int a,b,c;
+    for(int i = 0; i < m; i++){
+        cin >> a >> b >> c;
+        adj[a].push_back({b,c});
+        adj[b].push_back({a,c});
+    }
 }
 
-void solve(){
-	fill(dist, dist + 50001, INF);
-	pq.push({0, 1});
-	dist[1] = 0;
+int dikstra(){
+    fill(dist, dist+MX, INF);
+    q.push({0,1});
+    dist[1] = 0;
 
-	while(pq.size()){
-		int weight = pq.top().first; 
-		int cur_node = pq.top().second;
-		pq.pop();
+    while(q.size()){
+        int weight = q.top().first; 
+        int node = q.top().second; 
+        q.pop();
 
-		if(dist[cur_node] != weight) continue;
-		
-		for(pair<int,int> next : adj[cur_node]){
-			int next_weight = next.first;
-			int next_node = next.second;
-			
-			if(dist[next_node] > dist[cur_node] + next_weight){
-				dist[next_node] = dist[cur_node] + next_weight;
-				pq.push({dist[next_node], next_node});
-			}
-		}
-	}
-	// for(int i = 1; i <= v; i++){
-	// 	cout << dist[i] << ' ';
-	// }
-	// cout << '\n';
-	cout << dist[v] << '\n';
-}
+        if(dist[node] != weight) continue;
+
+        for(auto next : adj[node]){
+            int n_node = next.first;
+            int n_wight = next.second;
+
+            if(dist[n_node] > dist[node] + n_wight){
+                dist[n_node] = dist[node] + n_wight;
+                q.push({dist[n_node], n_node});
+            }
+        }
+    }
+    
+    return dist[n];
+}   
 
 int main(){
-	input();
-	solve();
-}
-
-void print(){
-	cout << '\n';
+    input();
+    int ret = dikstra();
+    cout << ret << '\n';
 }
