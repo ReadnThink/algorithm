@@ -1,43 +1,40 @@
 package 정렬;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
-public class 단어정렬 {
+public class 나이순정렬 {
+    static class User{
+        Integer age;
+        String name;
+        Integer order;
 
+        User(Integer age, String name, Integer order) {
+            this.age = age;
+            this.name = name;
+            this.order = order;
+        }
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        String[] arr = new String[n];
-
-        sc.nextLine();
+        User[] users = new User[n];
         for(int i = 0; i < n; i++){
-            arr[i] = sc.nextLine();
+            int a = sc.nextInt();
+            String name = sc.nextLine();
+            users[i] = new User(a, name, i);
         }
 
-//        Arrays.sort(arr, new Comparator<String>() {
-//            @Override
-//            public int compare(String s1, String s2) {
-//                if(s1.length() == s2.length()){
-//                    return s1.compareTo(s2);
-//                }else{
-//                    return s1.length() - s2.length();
-//                }
-//            }
-//        });
-
-        Arrays.sort(arr, (s1, s2) -> {
-            if(s1.length() == s2.length()){
-                return s1.compareTo(s2);
-            }else{
-                return s1.length() - s2.length();
+        Arrays.sort(users, (o1, o2) -> {
+            if (o1.age == o2.age) {
+                return o1.order - o2.order;
+            } else {
+                return o1.age - o2.age;
             }
         });
 
-
-        String temp = "";
-        for(String s : arr){
-            if(!temp.equals(s)) System.out.println(s);
-            temp = s;
+        for(int i = 0; i < n; i++){
+            System.out.println(users[i].age + users[i].name);
         }
     }
 }
