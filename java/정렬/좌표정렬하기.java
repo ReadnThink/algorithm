@@ -1,34 +1,41 @@
 package 정렬;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
 
-public class 단어정렬 {
+public class 좌표정렬하기 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        String[] arr = new String[n];
+        int[][] arr = new int[n][2];
 
-        sc.nextLine();
         for(int i = 0; i < n; i++){
-            arr[i] = sc.nextLine();
+            arr[i][0] = sc.nextInt();
+            arr[i][1] = sc.nextInt();
         }
 
-        Arrays.sort(arr, new Comparator<String>() {
-            @Override
-            public int compare(String s1, String s2) {
-                if(s1.length() == s2.length()){
-                    return s1.compareTo(s2);
-                }else{
-                    return s1.length() - s2.length();
-                }
+//        Arrays.sort(arr, new Comparator<int[]>() {
+//            @Override
+//            public int compare(int[] o1, int[] o2) {
+//                if(o1[0] == o2[0]){
+//                    return o1[1] - o2[1];
+//                }else{
+//                    return o1[0] - o2[0];
+//                }
+//            }
+//        });
+        Arrays.sort(arr, (o1, o2) -> {
+            if (o1[0] == o2[0]) {
+                return o1[1] - o2[1];
+            } else {
+                return o1[0] - o2[0];
             }
         });
 
-        String temp = "";
-        for(String s : arr){
-            if(!temp.equals(s)) System.out.println(s);
-            temp = s;
+        for(int i = 0; i < n; i++){
+            System.out.println(arr[i][0] + " " + arr[i][1]);
         }
     }
 }
