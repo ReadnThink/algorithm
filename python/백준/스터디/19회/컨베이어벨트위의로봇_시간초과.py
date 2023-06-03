@@ -1,10 +1,12 @@
 import sys
+from collections import deque
 input = sys.stdin.readline
 
 n,k = map(int, input().split())
 belt = list(map(int,input().split()))
 broken = [False for _ in range(n*2)]
 on_board = [False for _ in range(n)]
+q = deque(belt)
 
 def move_belt(belt):
     last = belt[-1]
