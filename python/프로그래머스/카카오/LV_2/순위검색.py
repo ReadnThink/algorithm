@@ -1,43 +1,57 @@
-from itertools import combinations
+from collections import defaultdict
 from bisect import bisect_left
 
-def solution(info, query):
+def make_subset(info):
+    # info_dict = defaultdict(list)
     info_dict = {}
+    for inf in info:
+        user_info = inf.split()
+        score = int(user_info[4])
+        # print(user_info)
     
-    for i in range(len(info)):
-        infol = info[i].split(' ')
-        key = infol[:-1] # 점수 제외 정보
-        # key.append('-')
-        value = int(infol[-1]) # 점수
-        
-        for j in range(5): # 정보로 만들 수 있는 모든 조합 dic로 생성
-            for c in combinations(key,j):
-                tmp = ''.join(c)
-                # print(tmp)
-                if tmp in info_dict:
-                    info_dict[tmp].append(value)
-                else:
-                    info_dict[tmp] = [value]
-                # info_dict[tmp].append(info_dict.get(tmp, list).append(int(value)))
-    # print(info_dict)  
-    # print()
-    for k in info_dict:
-        info_dict[k].sort() # 이분탐색을 위한 value들을 정렬
-    # print(info_dict)  
+        for subset in range(1 << 4): # 모든 부분집합에 score를 저장
+            key = []
+            for idx in range(4):
+                if (subset & 1 << idx) == 0:
+                    continue
+                key.append(user_info[idx])
+            key = ''.join(key)
+            # defaultdict 사용시
+            # info_dict[key].append(score) 
+            if key not in info_dict:
+                info_dict[key] = [score]
+            else:
+                info_dict[key].append(score)
+    return info_dict
 
+def parse_key(query):
+    # q = q.replace('-','').replace('and','').split()
+    # score = int(q[-1])
+    # key = ''.join(q[:-1])
+    
+    q = query.split()
+    key = q[0]+q[2]+q[4]+q[6]
+    score = int(q[7])
+    
+    key = key.replace('-','')
+    return key,score
+    
+
+def solution(info, query):
+    info_dict = make_subset(info)
+    # print(info_dict)
+    
+    # 정렬
+    for key,value in info_dict.items():
+        value.sort()
+        
+    # 쿼리에 맞는 조건 answer에 저장
     answer = []
     for q in query:
-        q = q.split()
-        value = int(q[-1])
-        q = q[0]+q[2]+q[4]+q[6]
-        key = ''.join(q).replace('-', '')
-        # print(key,value)
-        
-        if key in info_dict: # query의 key가 존재한다면
-            scores = info_dict[key]
-            if scores:
-                enter = bisect_left(scores, value)
-                answer.append(len(scores)-enter)
+        key,score = parse_key(q)
+        if key in info_dict: # 입력하는 query에서 key가 없는경우가 들어올 수 있다.
+            values = info_dict[key]
+            answer.append(len(values) - bisect_left(values, score))
         else:
             answer.append(0)
     return answer
