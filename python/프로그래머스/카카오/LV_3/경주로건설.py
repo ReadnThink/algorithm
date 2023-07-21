@@ -1,30 +1,42 @@
-def solution(board):
-    n = len(board)
-    opened = [(0,0,-1,0)] # y, x, direction, cost
-    closed = [[-1 for _ in range(n)] for _ in range(n)]
-    
-    answer = -1
-    while opened:
-        y, x, d, c = opened.pop(0)
-        if (y, x) == (n-1, n-1) and (answer == -1 or answer > c):
-            answer = c
+from collections import deque
 
-        neighbors = [(y, x-1), (y, x+1), (y-1, x), (y+1, x)]
-        for direction, (ny, nx) in enumerate(neighbors):            
-            # boundary
-            if ny <= -1 or ny >= n or nx <= -1 or nx >= n:
-                continue
+dy = [0,0,1,-1]
+dx = [1,-1,0,0]
+
+def bfs(board, dir):
+    q = deque()
+    N = len(board)
+    prices = [[int(1e9)] * N for _ in range(N)]
+    prices[0][0] = 0
+    
+    q.append([0,0,0,dir])
+    
+    while q:
+        y,x,cost,d = q.popleft()
+        
+        for i in range(4):
+            ny = y+dy[i]
+            nx = x+dx[i]
             
-            # wall
+            if ny < 0 or nx < 0 or ny >= N or nx >= N:
+                continue
             if board[ny][nx]:
                 continue
-
-            # visited and cheaper
-            cost = c + (100 if d == direction or d == -1 else 600)
-            if closed[ny][nx] != -1 and closed[ny][nx] < cost:
-                continue
+            
+            if i == d:
+                ncost = cost+100
+            else:
+                ncost = cost+600
                 
-            opened.append((ny, nx, direction, cost))
-            closed[ny][nx] = cost
-
-    return answer
+            if ncost < prices[ny][nx]:
+                    q.append([ny,nx,ncost,i])
+                    prices[ny][nx] = ncost 
+                    
+    for i in range(N):
+        print(prices[i])
+    print()
+    return prices[N-1][N-1]
+def solution(board):
+    answer = 0
+    
+    return min(bfs(board,0),bfs(board,2))
