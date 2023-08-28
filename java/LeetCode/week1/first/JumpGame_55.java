@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.week1.first;
 
 public class JumpGame_55 {
     public boolean canJump(int[] nums) {

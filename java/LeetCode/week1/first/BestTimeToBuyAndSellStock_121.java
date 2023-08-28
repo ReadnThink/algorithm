@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.week1.first;
 
 public class BestTimeToBuyAndSellStock_121 {
     public int maxProfit(int[] prices) {

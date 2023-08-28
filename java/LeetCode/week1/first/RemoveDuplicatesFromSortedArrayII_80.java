@@ -1,6 +1,4 @@
-package LeetCode;
-
-import java.util.Arrays;
+package LeetCode.week1.first;
 
 public class RemoveDuplicatesFromSortedArrayII_80 {
     public int removeDuplicates(int[] nums) {
