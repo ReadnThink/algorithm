@@ -8,11 +8,11 @@ def dfs(delete):
         if delete == nodes[i]:
             dfs(i)
 
+print(nodes)
 dfs(remove)
 print(nodes)
 ret = 0
 for i in range(len(nodes)):
-    
     if nodes[i] != -2 and i not in nodes:
         print(i)
         ret += 1
