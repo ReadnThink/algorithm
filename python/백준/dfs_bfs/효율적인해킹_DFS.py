@@ -5,7 +5,7 @@ sys.setrecursionlimit(10000000)
 def dfs(cur, visited):
     ret = 1
     for next in adj[cur]:
-        if visited[next] == True:
+        if visited[next]:
             continue
         visited[next] = True
         ret += dfs(next,visited)
@@ -22,7 +22,7 @@ for i in range(len(arr)):
 
 ret = -1
 for i in range(1, N+1):
-    visited = [[False] for _ in range(N+1)]    
+    visited = [False for _ in range(N+1)]
     visited[i] = True
     dp[i] = dfs(i,visited)
     ret = max (ret, dp[i])
