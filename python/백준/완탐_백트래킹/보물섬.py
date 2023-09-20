@@ -23,6 +23,7 @@ def bfs(y,x):
                 q.append([ny,nx])
                 
     return visited[y][x]-1
+
 n,m = map(int,input().split())
 arr = [list(input().strip()) for _ in range(n)]
 

@@ -43,29 +43,31 @@ dfs(-1,0,[])
 
 ret = 1e9
 total = 0
-for h_y,h_x in house:
+for hy,hx in house:
+    print(f'{hy=}, {hx=}')
+    diff = 1e9
     for candidate in candidates:
-        diff = 1e9
+        
         for idx in candidate:
-            c_y, c_x = chicken[idx]
-            diff = min(diff, abs(h_y-c_y) + abs(h_x-c_x))
+            cy, cx = chicken[idx]
+            print(f'  {cy=}, {cx=}')
+            diff = min(diff, abs(hy-cy) + abs(hx-cx))
         
-        total += diff
-        print(f'{diff=}')
-        
-    print(f'{total=}')
+        print(f' {diff=}')
+    total += diff
+    print(f'----------{total=}')
 ret = min(ret, total)
 print(ret)   
 
 # ret = 1e9
 # for candidate in candidates:
 #     for idx in candidate:
-#         c_y, c_x = chicken[idx]
+#         cy, cx = chicken[idx]
 #         diff = 0
 #         print(f'{house=}')
-#         for h_y, h_x in house:
-#             print(f'{abs(c_y-h_y) + abs(c_x-h_x)=}')
-#             diff += abs(c_y-h_y) + abs(c_x-h_x)
+#         for hy, hx in house:
+#             print(f'{abs(cy-hy) + abs(cx-hx)=}')
+#             diff += abs(cy-hy) + abs(cx-hx)
 #         ret = min(ret, diff)
 #         print(f'{diff=}, {ret=}')
 # print(ret)
