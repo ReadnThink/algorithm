@@ -57,12 +57,12 @@ for i in range(n):
         if board[i][j] == 'F':
             fire.append([i,j])
 bfsFire()
-for i in range(n):
-    print(visited_f[i])
-print()
+# for i in range(n):
+#     print(visited_f[i])
+# print()
 ret = bfs()
-for i in range(n):
-    print(visited_f[i])
+# for i in range(n):
+    # print(visited_f[i])
 
 if ret != -1:
     print(ret)
