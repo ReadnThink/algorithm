@@ -1,29 +1,26 @@
 def solution(s):
+    answer = len(s)
+    n = len(s)
+    limit = (n//2) + 1
     
-    n = len(s) // 2 + 1
-    for interval in range(1,n):
+    for unit in range(1,limit):
         start = 0
-        cnt = 1
-        z_zip = ''
-        print('interval = ', interval , "   ------------------")
-        while start+interval <= len(s):
-            sub = s[start:interval]
-            print(sub)
-            while sub == s[start+interval:start+(interval*2)]:
+        word = ''
+        while start+unit <= n:
+            cnt = 1
+            w = s[start:start+unit]
+            while w == s[start+(unit*cnt):start+(unit*(cnt+1))]:
                 cnt += 1
-                print('intarval : ',s[start+interval:start+(interval*2)])
-                start += interval
             
             if cnt > 1:
-                z_zip += str(cnt)
-            z_zip += sub
-            
-            if s[start:interval] == s[start:interval]:
-                start += 1
-            
-            
-        print('----------')
-    answer = 0
+                word += str(cnt)
+            word += w
+            start += unit*cnt
+        word += s[start:]
+        # print(unit,word)
+        answer = min(answer, len(word))
     return answer
 
 print(solution("aabbaccc"))
+print('-'*5)
+print(solution("abcabcdede"))
