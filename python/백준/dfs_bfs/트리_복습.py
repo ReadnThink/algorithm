@@ -1,29 +1,32 @@
-
-def dfs(cur):
-    leaf = 0
-    child = 0
-    
-    for next in adj[cur]:
-        if next == remove:
-            continue
-        leaf += dfs(next)
-        child += 1
-    if child == 0:
-        return 1
-    return leaf
-
 n = int(input())
 nodes = list(map(int,input().split()))
 remove = int(input())
-root = -111
-adj = [[] for _ in range(n+1)]
+
+adj = [[] for _ in range(n)]
+root = 0
 for i in range(n):
     if nodes[i] == -1:
         root = i
-    else:
-        adj[nodes[i]].append(i)
-
-if remove == root:
+        continue
+    adj[nodes[i]].append(i)
+    
+if root == remove:
     print(0)
-else:
-    print(dfs(root))
+    exit()
+# print(adj)
+
+def dfs(depth):
+    global remove
+    ret = 0
+    child = 0
+    for next in adj[depth]:
+        if next == remove:
+            continue
+        ret += dfs(next)
+        child += 1
+    
+    if child == 0:
+        return 1
+    return ret
+
+print(dfs(root))

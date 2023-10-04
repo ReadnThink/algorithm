@@ -3,23 +3,34 @@ import sys
 N,M = map(int, input().split())
 J = int(input())
 nums = [int(input()) for _ in range(J)]
-result = 0
+
+ret = 0
 start = 1
 end = M
-for cur in nums:
-    if start <= cur <= end:
-        continue
-    if cur > end:
-        move = cur - end
-        # print(move, cur)
-        result += move
-        start += move
-        end += move
+
+def can_catch(n):
+    if start <= n <= end:
+        return True
+    return False
+
+def move(n):
+    global end, start, ret
+    diff = 0
+    if n > end:
+        diff = n - end
+        end += diff
+        start += diff
     else:
-        move = start - cur
-        # print(move, cur)
-        result += move
-        start -= move
-        end -= move
-        
-print(result)
+        diff = start - n
+        end -= diff
+        start -= diff
+    ret += diff
+    
+for n in nums:
+    if can_catch(n):
+        continue
+    else:
+        move(n)
+
+
+print(ret)
