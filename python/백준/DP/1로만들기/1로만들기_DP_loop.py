@@ -1,0 +1,21 @@
+import sys
+input = sys.stdin.readline
+from queue import PriorityQueue
+from collections import deque
+sys.setrecursionlimit(1000000)
+import copy
+
+# n, m = map(int, input().split())
+n = int(input().strip())
+dp = [1e9]*(n+1)
+dp[0] = 0
+dp[1] = 0
+for i in range(2, n+1):
+    dp[i] = dp[i-1]+1
+    if i % 3 == 0:
+        dp[i] = min(dp[i//3], dp[i-1])+1
+    if i % 2 == 0:
+        dp[i] = min(dp[i//2], dp[i-1])+1
+    
+
+print(dp[n])
