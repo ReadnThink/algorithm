@@ -6,7 +6,6 @@ arr = list(map(int,input().split()))
 x = int(input())
 
 arr.sort()
-print(arr)
 left,right = 0,n-1
 ret = 0
 while left < right:
