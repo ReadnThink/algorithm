@@ -17,7 +17,6 @@ def make_che():
 n = int(input())        
 candidates = [True]*(n+1)
 che = make_che()
-# print(che)
 ret = 0
 end, sum, limit = 0,0,len(che)
 for start in range(limit):
