@@ -1,39 +1,25 @@
 import sys
 input = sys.stdin.readline
 
-n,m = map(int,input().split())
-arr = list(map(int,input().split()))
-
 def check(mid):
-    if mx > mid:
-        return False
-    size = 0
     cnt = 0
-    
-    for n in arr:
-        # print(f'{size=}, {mid=}')
-        size += n
-        if size > mid:
+    for v in arr:
+        cnt += v // mid
+        if v % mid:
             cnt += 1
-            size = n
-        elif size == mid:
-            cnt += 1
-            size = 0
-        
-    if size:
-        cnt += 1
-    # print(cnt, m, cnt <= m)
-    return cnt <= m    
+    return cnt <= n
 
+n,m = map(int,input().split())
+arr = list(int(input().strip()) for _ in range(m))
+# 최저값(left)가 0이면 ZeroDivisionErrorr 발생
+left, ret, right = 1,0,max(arr)
 
-l, r, ret, mx = 1, sum(arr), sys.maxsize, max(arr)
-while l <= r:
-    mid = (l+r) // 2
-    
+while left <= right:
+    mid = (left+right) // 2
     if check(mid):
-        r = mid - 1
-        ret = min(ret, mid)
+        ret = mid
+        right = mid-1
     else:
-        l = mid + 1
+        left = mid+1
 
 print(ret)
