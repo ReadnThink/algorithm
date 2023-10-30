@@ -1,6 +1,6 @@
 import sys
 input = sys.stdin.readline
-
+sys.setrecursionlimit(1000000)
 
 while True:
     n,m = map(float, input().split())
@@ -9,12 +9,8 @@ while True:
     n,m = int(n), int(m*100)
     candies = [list(map(float, input().split())) for _ in range(n)]
     dp = [0]*(m+1)
-    temp = 0
-    for candi in candies:
-        cal, price = int(candi[0]), int(candi[1]*100)
-        temp = price
-        
-        for cur in range(price, m+1):
-            dp[cur] = max(dp[cur-price]+cal, dp[cur])
+    for c,p in candies:
+        c,p = int(c),int(p)*100
+        for i in range(p,m+1):
+            dp[i] = max(dp[i-p]+c, dp[i])
     print(dp[m])
-        
