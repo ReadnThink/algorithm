@@ -2,23 +2,28 @@ import sys
 input = sys.stdin.readline
 sys.setrecursionlimit(100000000)
 
-def go(idx,tree,cnt):
-    if cnt < 0:
+t,w = map(int, input().split())
+dp = [[[-1]*2 for _ in range(31)] for _ in range(t)]
+tree = [int(input().strip()) for _ in range(t)]
+
+def go(idx, move, place):
+    # 1000개까지 들어오는 idx가 t와 같으면 종료
+    if idx == t:
         return 0
-    if idx >= n:
+    # 더이상 움직일 수 없기때문에 연산하지 않고 종료
+    if move < 0:
         return 0
     
-    ret = dp[idx][tree][cnt]
+    ret = dp[idx][move][place]
     if ret != -1:
         return ret
     
-    ret = max(go(idx+1,tree^1,cnt-1), go(idx+1,tree,cnt)) + (tree == jado[idx]-1)
-    dp[idx][tree][cnt] = ret
-    return ret
+    ret = max(
+            go(idx+1, move, place),
+            go(idx+1, move-1, place^1)) + (place == tree[idx]-1)
+    dp[idx][move][place] = ret
     
+    return ret
 
-n,m = map(int,input().split())
-jado = list(int(input()) for _ in range(n))
-dp = [[[-1]*(34) for _ in range(2)] for _ in range(n)]
-result = max(go(0,1,m-1), go(0,0,m))
-print(result)
+
+print(max(go(0,w,0),go(0,w-1,1)))
