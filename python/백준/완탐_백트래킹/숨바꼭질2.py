@@ -4,7 +4,7 @@ sys.setrecursionlimit(1000000)
 from collections import deque
 
 # 수빈이가 동생을 찾는 가장 빠른 시간을 구하고 그 경우의 수가몇가지인지 구하시오 (bfs)
-
+# 경우의 수는 거리배열을 더하기.
 def bfs(n,k):
     q = deque()
     q.append((n))
